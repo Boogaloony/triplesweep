@@ -11,6 +11,45 @@ interface Picture {
 export const Pictures = () => {
   const [pictures, setPictures] = useState<Picture[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchPictures = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pictures`);
+      const data = await response.json();
+      setPictures(data);
+    } catch (err) {
+      setError('Unable to load pictures. Please try again later.');
+      // Fallback to localStorage
+      const savedPictures = localStorage.getItem('pictures');
+      if (savedPictures) {
+        setPictures(JSON.parse(savedPictures));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const uploadPicture = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pictures`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const newPicture = await response.json();
+      setPictures(prev => [...prev, newPicture]);
+    } catch (err) {
+      setError('Failed to upload image. Please try again.');
+    }
+  };
 
   // Load pictures from localStorage on mount
   useEffect(() => {
@@ -74,6 +113,16 @@ export const Pictures = () => {
   return (
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
+        {loading && (
+          <div className="text-center">Loading pictures...</div>
+        )}
+
+        {error && (
+          <div className="text-center text-red-600 mb-4">
+            {error}
+          </div>
+        )}
+
         <h1 className="text-4xl font-bold text-center mb-8">Our Work</h1>
         
         {/* Upload Area */}
