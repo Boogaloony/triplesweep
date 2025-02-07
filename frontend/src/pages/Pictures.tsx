@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { Trash2, Upload } from 'lucide-react';
 
 interface Picture {
-  id: string;
+  id: number;
   url: string;
   name: string;
-  date: string;
+  created_at: string;
 }
 
 export const Pictures = () => {
@@ -17,10 +17,14 @@ export const Pictures = () => {
   const fetchPictures = async () => {
     try {
       setLoading(true);
+      console.log('Fetching pictures from:', `${import.meta.env.VITE_API_URL}/api/pictures`);
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pictures`);
+      console.log('Response:', response);
       const data = await response.json();
+      console.log('Pictures data:', data);
       setPictures(data);
     } catch (err) {
+      console.error('Error fetching pictures:', err);
       setError('Unable to load pictures. Please try again later.');
       // Fallback to localStorage
       const savedPictures = localStorage.getItem('pictures');
@@ -101,7 +105,7 @@ export const Pictures = () => {
     });
   };
 
-  const deletePicture = (id: string) => {
+  const deletePicture = (id: number) => {
     setPictures(prev => prev.filter(picture => picture.id !== id));
   };
 

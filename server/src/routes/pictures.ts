@@ -60,4 +60,30 @@ router.post('/', upload.single('image'), async (req: MulterRequest, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM pictures WHERE id = $1 RETURNING *',
+      [req.params.id]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Picture not found' });
+    }
+
+    // Delete from S3
+    const url = result.rows[0].url;
+    const key = url.split('.com/')[1];
+    
+    await s3.send(new DeleteObjectCommand({
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: key,
+    }));
+
+    res.json({ message: 'Picture deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete picture' });
+  }
+});
+
 export default router; 

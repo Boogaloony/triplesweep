@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { pool, initDb } from './db';
+import picturesRouter from './routes/pictures';
+import { initDb, pool } from './db';
 
 dotenv.config();
 
@@ -10,6 +11,15 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Routes
+app.use('/api/pictures', picturesRouter);
+
+// Error handling middleware
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!' });
+});
 
 // Initialize database
 initDb();
