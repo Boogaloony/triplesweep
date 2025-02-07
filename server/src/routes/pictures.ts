@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { pool } from '../db';
+import { Request } from 'express';
 
 const router = express.Router();
 
@@ -20,6 +21,10 @@ const upload = multer({
   },
 });
 
+interface MulterRequest extends Request {
+  file?: Express.Multer.File;
+}
+
 router.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM pictures ORDER BY created_at DESC');
@@ -29,7 +34,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('image'), async (req: MulterRequest, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
   try {

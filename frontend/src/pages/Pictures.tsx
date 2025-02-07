@@ -64,6 +64,11 @@ export const Pictures = () => {
     localStorage.setItem('pictures', JSON.stringify(pictures));
   }, [pictures]);
 
+  // Add this after your fetchPictures function
+  useEffect(() => {
+    fetchPictures();
+  }, []);
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -91,17 +96,7 @@ export const Pictures = () => {
   const handleFiles = (files: File[]) => {
     files.forEach(file => {
       if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const newPicture: Picture = {
-            id: crypto.randomUUID(),
-            url: e.target?.result as string,
-            name: file.name,
-            date: new Date().toISOString(),
-          };
-          setPictures(prev => [...prev, newPicture]);
-        };
-        reader.readAsDataURL(file);
+        uploadPicture(file);
       }
     });
   };
