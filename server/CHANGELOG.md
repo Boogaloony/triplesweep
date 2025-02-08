@@ -37,6 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2024-02-08]
 ### Changed
+- Consolidated environment configurations into single nodejs.config file
+- Removed redundant 00_environment.config
+- Fixed duplicate NodeCommand parameter issue
 - Updated `.ebextensions/nodejs.config` to remove build step from deployment
 - Moved TypeScript to devDependencies in `package.json`
 - Fixed `tsconfig.json` configuration for production builds
