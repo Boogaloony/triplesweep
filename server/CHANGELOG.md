@@ -18,6 +18,11 @@
 ### Fixed
 - Resolved ts-node command not found error in EB deployment
 - Improved dependency management for production builds
+- TypeScript configuration for proper module imports
+- Removed .ts extensions from import statements
+
+### Removed
+- Removed testDb.ts and its associated test script
 
 ## [Previous Changes]
 // Add previous significant changes here 
