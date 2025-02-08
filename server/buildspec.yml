@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm ci
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - rm -rf node_modules
+      - npm ci --production
+
+artifacts:
+  files:
+    - package.json
+    - package-lock.json
+    - .ebextensions/**/*
+    - .npmrc
+    - Procfile
+    - dist/**/*
+    - node_modules/**/*
+  discard-paths: no
