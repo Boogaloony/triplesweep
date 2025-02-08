@@ -11,6 +11,9 @@
   - `buildspec.yml` for AWS CodeBuild configuration
 - Moved buildspec.yml to root directory for proper pipeline configuration
 - Confirmed .npmrc and Procfile location in server directory for EB deployment
+- Updated buildspec.yml to properly handle TypeScript compilation:
+  - Added --include=dev flag for build phase
+  - Updated to modern --omit=dev syntax for production
 
 ### Fixed
 - Resolved ts-node command not found error in EB deployment

@@ -6,14 +6,14 @@ phases:
       nodejs: 18
     commands:
       - cd server
-      - npm ci
+      - npm ci --include=dev
   build:
     commands:
       - npm run build
   post_build:
     commands:
       - rm -rf node_modules
-      - npm ci --production
+      - npm ci --omit=dev
 
 artifacts:
   files:
