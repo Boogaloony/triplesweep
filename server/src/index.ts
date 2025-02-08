@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import picturesRouter from './routes/pictures';
 import { initDb, pool } from './db';
+import { config } from './config/default';
 
 dotenv.config();
 
@@ -43,7 +44,7 @@ app.get('/api/pictures', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = config.server.port;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
 }); 

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Centralized configuration management
+- Environment-specific port settings
+- Production environment variables in .ebextensions
 - Added .platform/hooks/predeploy/00_check_deployment.sh for deployment verification
 - Set executable permissions for deployment script
 
@@ -21,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated start script to use compiled JavaScript instead of ts-node
 - Removed dist/ from .gitignore for deployment
 - Added deployment verification script
+- Moved hardcoded values to configuration files
+- Standardized environment variable handling
 
 ### Fixed
 - Production deployment issues with TypeScript compilation
