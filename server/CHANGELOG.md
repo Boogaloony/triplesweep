@@ -37,23 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2024-02-08]
 ### Changed
-- Simplified nodejs.config to use standard EB configuration
-- Removed custom NodeCommand in favor of default Node.js platform settings
-- Updated environment configuration to use proper namespaces
-- Removed redundant 00_environment.config
-- Fixed duplicate NodeCommand parameter issue
-- Updated `.ebextensions/nodejs.config` to remove build step from deployment
-- Moved TypeScript to devDependencies in `package.json`
-- Fixed `tsconfig.json` configuration for production builds
-- Added production deployment files:
-  - `.npmrc` for production dependencies
-  - `Procfile` for EB process management
-  - `buildspec.yml` for AWS CodeBuild configuration
-- Moved buildspec.yml to root directory for proper pipeline configuration
-- Confirmed .npmrc and Procfile location in server directory for EB deployment
-- Updated buildspec.yml to properly handle TypeScript compilation:
-  - Added --include=dev flag for build phase
-  - Updated to modern --omit=dev syntax for production
+- Simplified EB configuration to minimal required settings
+- Removed problematic nodejs container settings
+- Relying on default EB Node.js platform configuration
 
 ### Fixed
 - Changed tsconfig.json "noEmit" setting from true to false to allow JavaScript file generation
