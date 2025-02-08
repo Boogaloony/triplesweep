@@ -37,7 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2024-02-08]
 ### Changed
-- Consolidated environment configurations into single nodejs.config file
+- Simplified nodejs.config to use standard EB configuration
+- Removed custom NodeCommand in favor of default Node.js platform settings
+- Updated environment configuration to use proper namespaces
 - Removed redundant 00_environment.config
 - Fixed duplicate NodeCommand parameter issue
 - Updated `.ebextensions/nodejs.config` to remove build step from deployment
