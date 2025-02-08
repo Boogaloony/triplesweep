@@ -53,8 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Changed tsconfig.json "noEmit" setting from true to false to allow JavaScript file generation
 - Fixed TypeScript compilation for production deployment
-- Updated .ebextensions/nodejs.config to use correct nodecommand parameter format
-- Resolved Elastic Beanstalk deployment configuration validation error
+- Updated .ebextensions/nodejs.config to use correct YAML map format
+- Resolved Elastic Beanstalk configuration validation errors
 
 ### Removed
 - Removed testDb.ts and its associated test script
