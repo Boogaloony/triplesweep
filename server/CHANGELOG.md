@@ -51,10 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated to modern --omit=dev syntax for production
 
 ### Fixed
-- Resolved ts-node command not found error in EB deployment
-- Improved dependency management for production builds
-- TypeScript configuration for proper module imports
-- Removed .ts extensions from import statements
+- Changed tsconfig.json "noEmit" setting from true to false to allow JavaScript file generation
+- Fixed TypeScript compilation for production deployment
+- Updated .ebextensions/nodejs.config to use correct nodecommand parameter format
+- Resolved Elastic Beanstalk deployment configuration validation error
 
 ### Removed
 - Removed testDb.ts and its associated test script
