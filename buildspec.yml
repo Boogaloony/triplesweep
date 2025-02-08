@@ -5,6 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - cd server
       - npm ci
   build:
     commands:
@@ -23,4 +24,5 @@ artifacts:
     - Procfile
     - dist/**/*
     - node_modules/**/*
-  discard-paths: no
+  base-directory: server
+  discard-paths: no 
