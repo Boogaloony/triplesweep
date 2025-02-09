@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://triplesweep.com'],
+  origin: config.cors.origins,
   credentials: true
 }));
 app.use(express.json());
